@@ -1,0 +1,6 @@
+pandas
+sentence_transformers
+numpy
+faiss
+uvicorn
+fastapi

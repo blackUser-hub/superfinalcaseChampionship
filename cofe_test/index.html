@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кофейный тест</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(to bottom, #f4f4f9, #ffe5b4);
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        h1, h3 {
+            text-align: center;
+            color: #333;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .options label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .result-section {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .result-section img {
+            max-width: 300px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Пройдите тест и узнайте свой напиток!</h1>
+        <p>Ответьте на вопросы, и мы подберем напиток, который идеально подходит вашему настроению.</p>
+        <form id="coffeeTest">
+            <!-- Вопросы -->
+            <div class="question">
+                <h3>1. Какое у вас настроение?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="energetic"> Энергичное</label>
+                    <label><input type="radio" name="q1" value="relaxed"> Расслабленное</label>
+                    <label><input type="radio" name="q1" value="romantic"> Романтическое</label>
+                    <label><input type="radio" name="q1" value="focused"> Сосредоточенное</label>
+                    <label><input type="radio" name="q1" value="creative"> Творческое</label>
+                    <label><input type="radio" name="q1" value="adventurous"> Приключенческое</label>
+                </div>
+            </div>
+            <div class="question">
+                <h3>2. Какой температуры напиток вы хотите?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="hot"> Горячий</label>
+                    <label><input type="radio" name="q2" value="warm"> Тёплый</label>
+                    <label><input type="radio" name="q2" value="cool"> Холодный</label>
+                </div>
+            </div>
+            <div class="question">
+                <h3>3. Какой вкус вам нравится?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="sweet"> Сладкий</label>
+                    <label><input type="radio" name="q3" value="bitter"> Горький</label>
+                    <label><input type="radio" name="q3" value="chocolate"> Шоколадный</label>
+                    <label><input type="radio" name="q3" value="fruity"> Фруктовый</label>
+                    <label><input type="radio" name="q3" value="creamy"> Кремовый</label>
+                    <label><input type="radio" name="q3" value="spicy"> Пряный</label>
+                </div>
+            </div>
+            <div class="question">
+                <h3>4. Какой напиток вы предпочитаете?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="coffee"> Кофе</label>
+                    <label><input type="radio" name="q4" value="tea"> Чай</label>
+                    <label><input type="radio" name="q4" value="cocoa"> Какао</label>
+                    <label><input type="radio" name="q4" value="lemonade"> Лимонад</label>
+                    <label><input type="radio" name="q4" value="berry_drink"> Морс</label>
+                    <label><input type="radio" name="q4" value="shake"> Коктейль</label>
+                </div>
+            </div>
+            <div class="question">
+                <h3>5. Как вы планируете наслаждаться напитком?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="alone"> В одиночестве</label>
+                    <label><input type="radio" name="q5" value="friends"> С друзьями</label>
+                    <label><input type="radio" name="q5" value="family"> С семьёй</label>
+                    <label><input type="radio" name="q5" value="romantic"> На свидании</label>
+                </div>
+            </div>
+            <div class="question">
+                <h3>6. В какое время дня вы хотите выпить напиток?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="morning"> Утро</label>
+                    <label><input type="radio" name="q6" value="afternoon"> День</label>
+                    <label><input type="radio" name="q6" value="evening"> Вечер</label>
+                    <label><input type="radio" name="q6" value="night"> Ночь</label>
+                </div>
+            </div>
+            <div class="question">
+                <h3>7. Учитываете ли вы калорийность напитка?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="yes"> Да</label>
+                    <label><input type="radio" name="q7" value="no"> Нет</label>
+                    <label><input type="radio" name="q7" value="moderate"> Иногда</label>
+                </div>
+            </div>
+            <div class="question">
+                <h3>8. Какое молоко вы предпочитаете (если нужно)?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q8" value="regular"> Обычное</label>
+                    <label><input type="radio" name="q8" value="almond"> Миндальное</label>
+                    <label><input type="radio" name="q8" value="oat"> Овсяное</label>
+                    <label><input type="radio" name="q8" value="no_milk"> Без молока</label>
+                </div>
+            </div>
+            <div class="question">
+                <h3>9. Хотите ли вы кофеин?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q9" value="yes"> Да</label>
+                    <label><input type="radio" name="q9" value="no"> Нет</label>
+                    <label><input type="radio" name="q9" value="little"> Немного</label>
+                </div>
+            </div>
+            <div class="question">
+                <h3>10. Какое впечатление вы хотите получить?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q10" value="refreshing"> Освежающее</label>
+                    <label><input type="radio" name="q10" value="comforting"> Уютное</label>
+                    <label><input type="radio" name="q10" value="energizing"> Заряжающее энергией</label>
+                </div>
+            </div>
+            <button type="button" class="btn" onclick="calculateResult()">Узнать результат</button>
+        </form>
+
+        <div class="result-section" id="resultSection">
+            <img id="resultImage" src="" alt="Напиток">
+            <h2 id="resultName"></h2>
+            <p id="resultDescription"></p>
+            <button class="btn" onclick="confirmSelection()">Подтвердить выбор</button>
+        </div>
+    </div>
+    
+    <script>
+        const drinks = [
+    // Кофе
+    {
+        name: "Эспрессо",
+        type: "coffee",
+        mood: "energetic",
+        temp: "hot",
+        image: "espresso.jpg",
+        description: "Классический крепкий кофе, который зарядит вас энергией.",
+        traits: {
+            q1: "energetic", 
+            q2: "hot", 
+            q3: "strong", 
+            q4: "coffee", 
+            q5: "no", 
+            q6: "intense", 
+            q7: "no", 
+            q8: "no_milk", 
+            q9: "no", 
+            q10: "classic"
+        }
+    },
+    {
+        name: "Американо",
+        type: "coffee",
+        mood: "relaxed",
+        temp: "hot",
+        image: "americano.jpg",
+        description: "Лёгкий и мягкий напиток для расслабленного настроения.",
+        traits: {
+            q1: "relaxed", 
+            q2: "hot", 
+            q3: "mild", 
+            q4: "coffee", 
+            q5: "no", 
+            q6: "smooth", 
+            q7: "no", 
+            q8: "no_milk", 
+            q9: "no", 
+            q10: "minimal"
+        }
+    },
+    {
+        name: "Ристретто",
+        type: "coffee",
+        mood: "energetic",
+        temp: "hot",
+        image: "ristretto.jpg",
+        description: "Очень крепкий кофе для настоящих гурманов.",
+        traits: {
+            q1: "energetic", 
+            q2: "hot", 
+            q3: "strong", 
+            q4: "coffee", 
+            q5: "no", 
+            q6: "intense", 
+            q7: "no", 
+            q8: "no_milk", 
+            q9: "no", 
+            q10: "bold"
+        }
+    },
+    {
+        name: "Лунго",
+        type: "coffee",
+        mood: "focused",
+        temp: "hot",
+        image: "lungo.jpg",
+        description: "Напиток для тех, кто любит крепкий кофе с лёгким послевкусием.",
+        traits: {
+            q1: "focused", 
+            q2: "hot", 
+            q3: "moderate", 
+            q4: "coffee", 
+            q5: "no", 
+            q6: "smooth", 
+            q7: "no", 
+            q8: "no_milk", 
+            q9: "no", 
+            q10: "refined"
+        }
+    },
+    {
+        name: "Капучино",
+        type: "coffee",
+        mood: "romantic",
+        temp: "warm",
+        image: "cappuccino.jpg",
+        description: "Идеальное сочетание кофе и молока для уютных моментов.",
+        traits: {
+            q1: "romantic", 
+            q2: "warm", 
+            q3: "creamy", 
+            q4: "coffee", 
+            q5: "yes", 
+            q6: "moderate", 
+            q7: "no", 
+            q8: "regular", 
+            q9: "no", 
+            q10: "comforting"
+        }
+    },
+    {
+        name: "Латте",
+        type: "coffee",
+        mood: "creative",
+        temp: "warm",
+        image: "latte.jpg",
+        description: "Мягкий молочный вкус, который вдохновляет.",
+        traits: {
+            q1: "creative", 
+            q2: "warm", 
+            q3: "mild", 
+            q4: "coffee", 
+            q5: "yes", 
+            q6: "smooth", 
+            q7: "little", 
+            q8: "oat", 
+            q9: "no", 
+            q10: "inspiring"
+        }
+    },
+    {
+        name: "Флэт уайт",
+        type: "coffee",
+        mood: "focused",
+        temp: "hot",
+        image: "flat_white.jpg",
+        description: "Для тех, кто любит баланс между кофе и молоком.",
+        traits: {
+            q1: "focused", 
+            q2: "hot", 
+            q3: "balanced", 
+            q4: "coffee", 
+            q5: "yes", 
+            q6: "smooth", 
+            q7: "no", 
+            q8: "regular", 
+            q9: "no", 
+            q10: "refined"
+        }
+    },
+    {
+        name: "Моккачино",
+        type: "coffee",
+        mood: "sweet",
+        temp: "warm",
+        image: "mochaccino.jpg",
+        description: "Шоколадный аромат с нотами кофе.",
+        traits: {
+            q1: "sweet", 
+            q2: "warm", 
+            q3: "chocolatey", 
+            q4: "coffee", 
+            q5: "yes", 
+            q6: "rich", 
+            q7: "yes", 
+            q8: "regular", 
+            q9: "no", 
+            q10: "indulgent"
+        }
+    },
+    {
+        name: "Раф-кофе",
+        type: "coffee",
+        mood: "relaxed",
+        temp: "warm",
+        image: "raf_coffee.jpg",
+        description: "Ванильный кремовый вкус, который радует душу.",
+        traits: {
+            q1: "relaxed", 
+            q2: "warm", 
+            q3: "vanilla", 
+            q4: "coffee", 
+            q5: "yes", 
+            q6: "creamy", 
+            q7: "little", 
+            q8: "regular", 
+            q9: "no", 
+            q10: "comforting"
+        }
+    },
+    {
+        name: "Кофе по-венски",
+        type: "coffee",
+        mood: "romantic",
+        temp: "hot",
+        image: "vienna_coffee.jpg",
+        description: "Ароматный напиток с взбитыми сливками.",
+        traits: {
+            q1: "romantic", 
+            q2: "hot", 
+            q3: "aromatic", 
+            q4: "coffee", 
+            q5: "yes", 
+            q6: "rich", 
+            q7: "little", 
+            q8: "cream", 
+            q9: "yes", 
+            q10: "elegant"
+        }
+    },
+    {
+        name: "Ирландский кофе",
+        type: "coffee",
+        mood: "adventurous",
+        temp: "hot",
+        image: "irish_coffee.jpg",
+        description: "Кофе с добавлением ирландского виски для смелых.",
+        traits: {
+            q1: "adventurous", 
+            q2: "hot", 
+            q3: "strong", 
+            q4: "coffee", 
+            q5: "yes", 
+            q6: "rich", 
+            q7: "no", 
+            q8: "cream", 
+            q9: "yes", 
+            q10: "bold"
+        }
+    },
+    // Чаи
+    {
+        name: "Чёрный чай (классический)",
+        type: "tea",
+        mood: "relaxed",
+        temp: "hot",
+        image: "black_tea.jpg",
+        description: "Традиционный чай для спокойного вечера.",
+        traits: {
+            q1: "relaxed", 
+            q2: "hot", 
+            q3: "classic", 
+            q4: "tea", 
+            q5: "no", 
+            q6: "strong", 
+            q7: "no", 
+            q8: "no_milk", 
+            q9: "no", 
+            q10: "soothing"
+        }
+    },
+    {
+        name: "Зелёный чай",
+        type: "tea",
+        mood: "healthy",
+        temp: "warm",
+        image: "green_tea.jpg",
+        description: "Полезный и освежающий напиток для души.",
+        traits: {
+            q1: "healthy", 
+            q2: "warm", 
+            q3: "light", 
+            q4: "tea", 
+            q5: "no", 
+            q6: "fresh", 
+            q7: "no", 
+            q8: "no_milk", 
+            q9: "no", 
+            q10: "detox"
+        }
+    },  {
+        name: "Матча",
+        type: "tea",
+        mood: "creative",
+        temp: "warm",
+        image: "matcha.jpg",
+        description: "Яркий зелёный чай, полный энергии и вдохновения.",
+        traits: {
+            q1: "creative", 
+            q2: "warm", 
+            q3: "rich", 
+            q4: "tea", 
+            q5: "no", 
+            q6: "unique", 
+            q7: "no", 
+            q8: "no_milk", 
+            q9: "no", 
+            q10: "exotic"
+        }
+    },
+    {
+        name: "Чай с лимоном",
+        type: "tea",
+        mood: "sick",
+        temp: "hot",
+        image: "tea_with_lemon.jpg",
+        description: "Напиток для холодных вечеров или для укрепления иммунитета.",
+        traits: {
+            q1: "sick", 
+            q2: "hot", 
+            q3: "citrusy", 
+            q4: "tea", 
+            q5: "no", 
+            q6: "refreshing", 
+            q7: "no", 
+            q8: "no_milk", 
+            q9: "no", 
+            q10: "healing"
+        }
+    },
+
+    // Какао
+    {
+        name: "Классическое какао",
+        type: "cocoa",
+        mood: "nostalgic",
+        temp: "warm",
+        image: "cocoa.jpg",
+        description: "Вкус детства в каждой кружке.",
+        traits: {
+            q1: "nostalgic", 
+            q2: "warm", 
+            q3: "sweet", 
+            q4: "cocoa", 
+            q5: "yes", 
+            q6: "creamy", 
+            q7: "yes", 
+            q8: "regular", 
+            q9: "no", 
+            q10: "comforting"
+        }
+    },
+    {
+        name: "Горячий шоколад",
+        type: "cocoa",
+        mood: "romantic",
+        temp: "hot",
+        image: "hot_chocolate.jpg",
+        description: "Насыщенный шоколадный напиток для особых моментов.",
+        traits: {
+            q1: "romantic", 
+            q2: "hot", 
+            q3: "rich", 
+            q4: "cocoa", 
+            q5: "yes", 
+            q6: "luxurious", 
+            q7: "yes", 
+            q8: "cream", 
+            q9: "no", 
+            q10: "decadent"
+        }
+    },
+
+    // Лимонады
+    {
+        name: "Классический лимонад",
+        type: "lemonade",
+        mood: "refreshing",
+        temp: "cool",
+        image: "classic_lemonade.jpg",
+        description: "Идеальный выбор для жаркого дня.",
+        traits: {
+            q1: "refreshing", 
+            q2: "cool", 
+            q3: "citrusy", 
+            q4: "lemonade", 
+            q5: "no", 
+            q6: "light", 
+            q7: "no", 
+            q8: "no_milk", 
+            q9: "no", 
+            q10: "classic"
+        }
+    },
+    {
+        name: "Лимонад с мятой",
+        type: "lemonade",
+        mood: "refreshing",
+        temp: "cool",
+        image: "mint_lemonade.jpg",
+        description: "Освежающий напиток с нотками мяты.",
+        traits: {
+            q1: "refreshing", 
+            q2: "cool", 
+            q3: "minty", 
+            q4: "lemonade", 
+            q5: "no", 
+            q6: "herbal", 
+            q7: "no", 
+            q8: "no_milk", 
+            q9: "no", 
+            q10: "invigorating"
+        }
+    },
+
+    // Морсы
+    {
+        name: "Клюквенный морс",
+        type: "berry_drink",
+        mood: "healthy",
+        temp: "cool",
+        image: "cranberry_morse.jpg",
+        description: "Полезный и освежающий морс из клюквы.",
+        traits: {
+            q1: "healthy", 
+            q2: "cool", 
+            q3: "tart", 
+            q4: "berry_drink", 
+            q5: "no", 
+            q6: "refreshing", 
+            q7: "no", 
+            q8: "no_milk", 
+            q9: "no", 
+            q10: "detox"
+        }
+    },
+    {
+        name: "Черничный морс",
+        type: "berry_drink",
+        mood: "healthy",
+        temp: "cool",
+        image: "blueberry_morse.jpg",
+        description: "Ягодный напиток для тех, кто заботится о здоровье.",
+        traits: {
+            q1: "healthy", 
+            q2: "cool", 
+            q3: "fruity", 
+            q4: "berry_drink", 
+            q5: "no", 
+            q6: "sweet", 
+            q7: "no", 
+            q8: "no_milk", 
+            q9: "no", 
+            q10: "nourishing"
+        }
+    },
+
+    // Дополнительные напитки
+    {
+        name: "Молочный коктейль",
+        type: "shake",
+        mood: "sweet",
+        temp: "cool",
+        image: "milkshake.jpg",
+        description: "Сладкий и нежный коктейль для поднятия настроения.",
+        traits: {
+            q1: "sweet", 
+            q2: "cool", 
+            q3: "creamy", 
+            q4: "shake", 
+            q5: "yes", 
+            q6: "luxurious", 
+            q7: "yes", 
+            q8: "regular", 
+            q9: "no", 
+            q10: "indulgent"
+        }
+    },
+    {
+        name: "Фреш",
+        type: "juice",
+        mood: "healthy",
+        temp: "cool",
+        image: "fresh.jpg",
+        description: "Свежевыжатый сок для бодрости.",
+        traits: {
+            q1: "healthy", 
+            q2: "cool", 
+            q3: "citrusy", 
+            q4: "juice", 
+            q5: "no", 
+            q6: "natural", 
+            q7: "no", 
+            q8: "no_milk", 
+            q9: "no", 
+            q10: "energizing"
+        }
+    }
+];
+    
+        function calculateResult() {
+            const form = document.forms.coffeeTest;
+            const userAnswers = {};
+    
+            // Собираем ответы пользователя
+            for (let i = 1; i <= 10; i++) {
+                const question = `q${i}`;
+                userAnswers[question] = form[question]?.value || null;
+            }
+    
+            let bestMatch = null;
+            let highestScore = 0;
+    
+            // Сравниваем ответы пользователя с характеристиками напитков
+            drinks.forEach(drink => {
+                let score = 0;
+    
+                // Считаем совпадения
+                for (const [key, value] of Object.entries(drink.traits)) {
+                    if (userAnswers[key] && userAnswers[key] === value) {
+                        score++;
+                    }
+                }
+    
+                // Если баллы выше, чем у текущего лучшего совпадения
+                if (score > highestScore) {
+                    highestScore = score;
+                    bestMatch = drink;
+                }
+            });
+    
+            // Отображаем результат
+            const resultSection = document.getElementById("resultSection");
+            const resultName = document.getElementById("resultName");
+            const resultDescription = document.getElementById("resultDescription");
+            const resultImage = document.getElementById("resultImage");
+    
+            if (bestMatch) {
+                resultName.textContent = bestMatch.name;
+                resultDescription.textContent = bestMatch.description;
+                resultImage.src = bestMatch.image;
+            } else {
+                resultName.textContent = "Извините, ничего не найдено.";
+                resultDescription.textContent = "Мы не смогли найти напиток, который идеально соответствует вашим предпочтениям. Попробуйте изменить ответы!";
+                resultImage.src = "images/default.jpg"; // Картинка-заглушка
+            }
+    
+            resultSection.style.display = "block";
+        }
+    </script>
+</body>
+</html>
